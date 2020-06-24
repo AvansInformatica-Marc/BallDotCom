@@ -1,0 +1,242 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Ball.com ProductManagement"
+  },
+  "host": "localhost:8087",
+  "tags": [
+    {
+      "name": "product"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/product": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "operationId": "getAllProducts",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "product"
+        ],
+        "operationId": "addProduct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductNoId"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "resource created",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "operationId": "getProductById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "product"
+        ],
+        "operationId": "updateProduct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event-name",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": ["PriceChanged", "ProductBought", "NameChanged", "NewProductsInStock"]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductNoId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resource updated",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "product"
+        ],
+        "operationId": "deleteProduct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event-name",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": ["OutOfStock", "ProductionEnded", "ProductRecall"]
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "resource deleted"
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Product"
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "supplier": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "stock": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "supplier",
+        "price",
+        "stock"
+      ]
+    },
+    "ProductNoId": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "supplier": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "stock": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "supplier",
+        "price",
+        "stock"
+      ]
+    }
+  }
+}

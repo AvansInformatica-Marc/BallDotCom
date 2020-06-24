@@ -1,0 +1,17 @@
+{
+  "name": "ball_notification_service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "yarn global add nodemon"
+  },
+  "dependencies": {
+    "amqp": "^0.2.7",
+    "amqplib": "^0.5.5",
+    "mongoose": "^5.9.14",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.3",
+    "sprintf": "^0.1.5"
+  }
+}

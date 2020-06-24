@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Ball.com SupplierManagement"
+  },
+  "host": "localhost:8089",
+  "tags": [
+    {
+      "name": "supplier"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/supplier": {
+      "get": {
+        "tags": [
+          "supplier"
+        ],
+        "operationId": "getAllSuppliers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Suppliers"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "supplier"
+        ],
+        "operationId": "addSupplier",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupplierNoId"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "resource created",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/supplier/{id}": {
+      "get": {
+        "tags": [
+          "supplier"
+        ],
+        "operationId": "getSupplierById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "supplier"
+        ],
+        "operationId": "updateSupplier",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event-name",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NameChanged"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupplierNoId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resource updated",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "supplier"
+        ],
+        "operationId": "deleteSupplier",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event-name",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SupplierBanned",
+              "AccountRemoved"
+            ]
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "resource deleted"
+          },
+          "404": {
+            "description": "resource not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Suppliers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Supplier"
+      }
+    },
+    "Supplier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "SupplierNoId": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}

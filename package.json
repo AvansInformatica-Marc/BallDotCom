@@ -1,0 +1,31 @@
+{
+  "name": "ball.com",
+  "version": "0.0.1",
+  "description": "Node.js implementation of a microservices architecture for a webshop",
+  "main": "index.js",
+  "repository": "git@gitlab.com:avans-solution-architecture/ball.com.git",
+  "author": "Marco van Poortvliet <marc0tjevp@gmail.com>",
+  "license": "GPL-2.0",
+  "private": false,
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {}
+}
